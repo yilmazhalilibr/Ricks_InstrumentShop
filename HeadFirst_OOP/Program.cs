@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HeadFirst_OOP.EnumType;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -11,40 +12,84 @@ namespace HeadFirst_OOP
     {
         static void Main(string[] args)
         {
-            GuitarSpec whatErinLikesSpec = new GuitarSpec(Builder.FENDER, "Stratocastor", Type.ELECTRIC, 1, Wood.ALDER, Wood.ALDER);
+
             Inventory inventory = new Inventory();
             initializeInventory(inventory);
-            Guitar whatErinLikes = new Guitar(
-                "",
-                0, whatErinLikesSpec);
 
-            var guitarList = inventory.Search(whatErinLikesSpec);
-            if (guitarList.Count > 0)
+
+            Dictionary<string, object> propertiesList = new Dictionary<string, object>();
+
+            propertiesList.Add("builder", Builder.GIBSON);
+            //propertiesList.Add("backWood", Wood.MAPLE);
+            //propertiesList.Add("topWood", Wood.COCOBOLO);
+
+
+            InstrumentSpec clientSpec = new InstrumentSpec(propertiesList);
+            try
             {
-
-                foreach (var guitar in guitarList)
+                var matchingInstruments = inventory.Search(clientSpec);
+                if (matchingInstruments.Count != 0 && matchingInstruments != null)
                 {
-                    Console.WriteLine($"{guitar.GetInstrumentSpec().GetBuilder()} " +
-                        $"{guitar.GetInstrumentSpec().GetModel()} {guitar.GetInstrumentSpec().GetType()} " +
-                        $"{guitar.GetInstrumentSpec().GetBackWood()} {guitar.GetInstrumentSpec().GetTopWood()} {guitar.GetPrice()}"
-                  );
+                    Console.WriteLine("You might like these instruments:");
+                    for (int i = 0; i < 1; i++)
+                    {
+                        Instrument instrument = matchingInstruments[i];
+                        InstrumentSpec spec = instrument.GetInstrumentSpec();
+
+
+                        if (!(spec.GetProperties().ContainsKey("instrumentType")))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            //Console.WriteLine("" + spec.GetProperties().Keys + ": " + spec.GetProperty(spec.GetProperties().Keys.ToString()) + "");
+                            //burası değişecek
+                            Console.WriteLine("We have a " + spec.GetProperty("instrumentType") + " with the following properties:");
+                            int count = 1;
+                            foreach (var j in instrument.GetInstrumentSpec().GetProperties())
+                            {
+                                Console.WriteLine();
+                                Console.Write(count + " - " + j.Key);
+                                Console.Write(" : ");
+                                Console.Write(j.Value);
+                                count++;
+                            }
+
+
+                        }
+                        Console.WriteLine("\n" + "----You can have this " + spec.GetProperty("instrumentType") + " for $" + instrument.GetPrice() + "\n");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Sorry, we have nothing for you.");
                 }
 
-
             }
-            else
+            catch (Exception)
             {
-                Console.WriteLine("Sorry not found.");
+                Console.WriteLine("Error: Main Exception");
 
             }
+
+
+
+
+
             Console.ReadLine();
         }
         private static void initializeInventory(Inventory inventory)
         {
-            GuitarSpec GuitarStratocastor = new GuitarSpec(Builder.FENDER, "Stratocastor", Type.ELECTRIC, 1, Wood.ALDER, Wood.ALDER);
-            GuitarSpec GuitarStratocastor2 = new GuitarSpec(Builder.FENDER, "Stratocastor", Type.ELECTRIC, 2, Wood.ALDER, Wood.ALDER);
-            inventory.addInstrument("V9505", 1549.55, GuitarStratocastor);
-            inventory.addInstrument("V9504", 1249.55, GuitarStratocastor2);
+            Dictionary<string, object> properties = new Dictionary<string, object>();
+            properties.Add("instrumentType", InstrumentType.GUITAR);
+            properties.Add("builder", Builder.GIBSON);
+            properties.Add("model", "CJ");
+            properties.Add("type", Type.ACOUSTIC);
+            properties.Add("numString", 6);
+            properties.Add("topWood", Wood.INDIAN_ROSEWOOD);
+            properties.Add("backWood", Wood.MAPLE);
+            inventory.addInstrument("11277", 3999.95, new InstrumentSpec(properties));
         }
     }
 

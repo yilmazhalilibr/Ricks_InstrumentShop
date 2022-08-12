@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HeadFirst_OOP
 {
-    public abstract class Instrument
+    public class Instrument
     {
 
         protected string _serialNumber;

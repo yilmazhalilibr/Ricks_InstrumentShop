@@ -43,22 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Instrument\Banjo.cs" />
-    <Compile Include="Instrument\Bass.cs" />
+    <Compile Include="EnumType\InstrumentType.cs" />
     <Compile Include="EnumType\Builder.cs" />
-    <Compile Include="Instrument\Dobro.cs" />
-    <Compile Include="Instrument\Fiddle.cs" />
-    <Compile Include="Instrument\Guitar.cs" />
-    <Compile Include="Spec\BanjoSpec.cs" />
-    <Compile Include="Spec\BassSpec.cs" />
-    <Compile Include="Spec\DobroSpec.cs" />
-    <Compile Include="Spec\FiddleSpec.cs" />
-    <Compile Include="Spec\GuitarSpec.cs" />
     <Compile Include="Instrument\Instrument.cs" />
     <Compile Include="Spec\InstrumentSpec.cs" />
     <Compile Include="Inventory\Inventory.cs" />
-    <Compile Include="Instrument\Mandolin.cs" />
-    <Compile Include="Spec\MandolinSpec.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EnumType\Style.cs" />

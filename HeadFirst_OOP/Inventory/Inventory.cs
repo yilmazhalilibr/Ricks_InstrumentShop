@@ -1,4 +1,5 @@
-﻿using HeadFirst_OOP.Spec;
+﻿
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,15 +18,7 @@ namespace HeadFirst_OOP
 
         public void addInstrument(string serialNumber, double price, InstrumentSpec spec)
         {
-            Instrument instrument = null;
-            if (typeof(GuitarSpec).IsInstanceOfType(spec))
-            {
-                instrument = new Guitar(serialNumber, price, (GuitarSpec)spec);
-            }
-            else if (typeof(MandolinSpec).IsInstanceOfType(spec))
-            {
-                instrument = new Mandolin(serialNumber, price, (MandolinSpec)spec);
-            }
+            Instrument instrument = new Instrument(serialNumber, price, spec);
             instrumentList.Add(instrument);
         }
         public Instrument GetInstrument(string serialNumber)
@@ -42,7 +35,10 @@ namespace HeadFirst_OOP
             return null;
         }
 
-
+        /*
+        //-------------------------------------------------
+        //-------------------------------------------------
+        //-------------------------------------------------
         public List<Guitar> Search(GuitarSpec searchSpec)
         {
             Builder builder = searchSpec.GetBuilder();
@@ -154,7 +150,24 @@ namespace HeadFirst_OOP
 
 
         }
+        //-------------------------------------------------
+        //-------------------------------------------------
+        //-------------------------------------------------
+        */
+        public List<Instrument> Search(InstrumentSpec searchSpec)
+        {
+            List<Instrument> newList = new List<Instrument>();
+            for (int i = 0; i < 1; i++)
+            {
+                Instrument instrument = instrumentList[instrumentList.Count - 1 + i];
+                if (instrument.GetInstrumentSpec().matches(searchSpec))
+                {
+                    newList.Add(instrument);
 
+                }
+            }
 
+            return newList;
+        }
     }
 }
