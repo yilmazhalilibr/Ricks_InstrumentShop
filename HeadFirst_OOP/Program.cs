@@ -44,7 +44,7 @@ namespace HeadFirst_OOP
                         else
                         {
                             //Console.WriteLine("" + spec.GetProperties().Keys + ": " + spec.GetProperty(spec.GetProperties().Keys.ToString()) + "");
-                            //burası değişecek
+
                             Console.WriteLine("We have a " + spec.GetProperty("instrumentType") + " with the following properties:");
                             int count = 1;
                             foreach (var j in instrument.GetInstrumentSpec().GetProperties())
